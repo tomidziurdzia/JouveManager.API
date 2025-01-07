@@ -4,6 +4,12 @@
     <ProjectReference Include="..\JouveManager.Application\JouveManager.Application.csproj" />
     <ProjectReference Include="..\JouveManager.Infrastructure\JouveManager.Infrastructure.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
+  </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>

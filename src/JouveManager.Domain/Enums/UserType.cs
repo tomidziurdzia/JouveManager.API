@@ -1,16 +1,10 @@
-using System.ComponentModel;
+using System.Text.Json.Serialization;
 
-namespace JouveManager.Domain.Enums;
-
-
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum UserType
 {
-    [Description("Administrative")]
-    Administrative = 1,
-
-    [Description("Manager")]
-    Manager = 2,
-
-    [Description("Employee")]
-    Employee = 3,
+    Administrative,
+    Manager,
+    Employee,
+    Client
 }

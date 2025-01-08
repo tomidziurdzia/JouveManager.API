@@ -1,6 +1,5 @@
 using JouveManager.Application.Models.Authorization;
 using JouveManager.Domain;
-using JouveManager.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 

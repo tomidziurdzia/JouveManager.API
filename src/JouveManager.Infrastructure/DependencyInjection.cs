@@ -1,6 +1,9 @@
-﻿using JouveManager.Application.Data;
+﻿using JouveManager.Application.Contracts.Identity;
+using JouveManager.Application.Data;
+using JouveManager.Application.Models.Token;
 using JouveManager.Domain;
 using JouveManager.Infrastructure.Data;
+using JouveManager.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +25,8 @@ public static class DependencyInjection
                 .AddDefaultTokenProviders();
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddTransient<IAuthService, AuthService>();
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         return services;
     }

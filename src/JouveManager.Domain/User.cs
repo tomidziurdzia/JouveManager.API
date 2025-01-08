@@ -1,5 +1,3 @@
-using JouveManager.Domain.Abstractions;
-using JouveManager.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace JouveManager.Domain;

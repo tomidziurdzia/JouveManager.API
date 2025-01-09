@@ -6,5 +6,5 @@ public enum UserType
     Administrative,
     Manager,
     Employee,
-    Client
+    Generic
 }

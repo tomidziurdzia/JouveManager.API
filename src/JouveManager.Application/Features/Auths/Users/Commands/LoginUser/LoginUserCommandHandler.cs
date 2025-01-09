@@ -44,7 +44,7 @@ public class LoginUserCommandHandler(
             FullName = user.FullName!,
             Email = user.Email!,
             UserName = user.UserName!,
-            Avatar = user.AvatarUrl!,
+            AvatarUrl = user.AvatarUrl!,
             Token = token,
             UserTypes = user.UserTypes.Select(ut => ut.ToString()).ToList(),
             Roles = roles.ToList()

@@ -2,7 +2,6 @@ using JouveManager.Application;
 using JouveManager.Infrastructure;
 using JouveManager.Infrastructure.Data;
 using JouveManager.WebApi;
-using JouveManager.WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +20,6 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-
 app.UseApiServices();
 
 if (app.Environment.IsDevelopment())
@@ -32,5 +30,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapUserEndpoints();
+app.RegisterUserEndpoints();
+
 app.Run();

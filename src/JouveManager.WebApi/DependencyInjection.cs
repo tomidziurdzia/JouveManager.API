@@ -8,10 +8,10 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddHealthChecks()
             .AddNpgSql(configuration.GetConnectionString("DefaultConnection")!);
+
 
         return services;
     }

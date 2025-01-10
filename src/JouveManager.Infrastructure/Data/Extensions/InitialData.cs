@@ -35,7 +35,6 @@ public class InitialData
                     EmailConfirmed = true,
                     PhoneNumber = "1234567890",
                     PhoneNumberConfirmed = true,
-                    AvatarUrl = "https://firebasestorage.googleapis.com/v0/b/edificacion-app.appspot.com/o/vaxidrez.jpg?alt=media&token=14a28860-d149-461e-9c25-9774d7ac1b24"
                 };
                 await userManager.CreateAsync(userAdmin, "Walter@960");
                 await userManager.AddToRolesAsync(userAdmin, new string[] { Role.Owner });
@@ -49,7 +48,6 @@ public class InitialData
                     EmailConfirmed = true,
                     PhoneNumber = "1234567890",
                     PhoneNumberConfirmed = true,
-                    AvatarUrl = "https://firebasestorage.googleapis.com/v0/b/edificacion-app.appspot.com/o/avatar-1.webp?alt=media&token=58da3007-ff21-494d-a85c-25ffa758ff6d"
                 };
 
                 await userManager.CreateAsync(user, "Walter@960");

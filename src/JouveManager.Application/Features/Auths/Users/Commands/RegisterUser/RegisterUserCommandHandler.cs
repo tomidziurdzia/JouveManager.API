@@ -2,7 +2,6 @@ using JouveManager.Application.Contracts.Identity;
 using JouveManager.Application.CQRS;
 using JouveManager.Application.DTOs.User;
 using JouveManager.Application.Exceptions;
-using JouveManager.Application.Models.Authorization;
 using JouveManager.Domain;
 using Microsoft.AspNetCore.Identity;
 

@@ -15,7 +15,7 @@ public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtS
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
-    public string CreateToken(User user, IList<string> roles, ICollection<UserType> userTypes)
+    public string CreateToken(User user, IList<string> roles)
     {
         var claims = new List<Claim>
         {
@@ -26,8 +26,6 @@ public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtS
         };
 
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-
-        claims.AddRange(userTypes.Select(userType => new Claim("userType", userType.ToString())));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

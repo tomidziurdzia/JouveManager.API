@@ -2,7 +2,6 @@ using JouveManager.Application.Contracts.Identity;
 using JouveManager.Application.CQRS;
 using JouveManager.Application.DTOs.User;
 using JouveManager.Application.Exceptions;
-using JouveManager.Application.Models.Authorization;
 using JouveManager.Domain;
 using Microsoft.AspNetCore.Identity;
 
@@ -27,8 +26,7 @@ public class RegisterUserCommandHandler(UserManager<User> userManager, IAuthServ
             Email = request.Email,
             UserName = request.Email,
             AvatarUrl = request.AvatarUrl,
-            PhoneNumber = request.PhoneNumber,
-            UserTypes = request.UserTypes,
+            PhoneNumber = request.PhoneNumber
         };
 
         var result = await userManager.CreateAsync(user, request.Password);
@@ -38,12 +36,11 @@ public class RegisterUserCommandHandler(UserManager<User> userManager, IAuthServ
             throw new Exception("Failed to create user");
         }
 
-        await userManager.AddToRoleAsync(user, Role.Employee);
+        await userManager.AddToRoleAsync(user, request.Role);
 
         var roles = await userManager.GetRolesAsync(user);
 
-        var token = authService.CreateToken(user, roles, user.UserTypes);
-
+        var token = authService.CreateToken(user, roles);
 
         return new AuthResponseDto()
         {
@@ -56,7 +53,6 @@ public class RegisterUserCommandHandler(UserManager<User> userManager, IAuthServ
             AvatarUrl = user.AvatarUrl!,
             Token = token,
             PhoneNumber = request.PhoneNumber!,
-            UserTypes = user.UserTypes.Select(ut => ut.ToString()).ToList(),
             Roles = roles.ToList()
         };
     }

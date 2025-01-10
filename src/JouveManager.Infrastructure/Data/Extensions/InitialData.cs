@@ -17,9 +17,11 @@ public class InitialData
         {
             if (!roleManager.Roles.Any())
             {
+                await roleManager.CreateAsync(new IdentityRole(Role.Owner));
                 await roleManager.CreateAsync(new IdentityRole(Role.Manager));
                 await roleManager.CreateAsync(new IdentityRole(Role.Administrative));
-                await roleManager.CreateAsync(new IdentityRole(Role.Employee));
+                await roleManager.CreateAsync(new IdentityRole(Role.Driver));
+                await roleManager.CreateAsync(new IdentityRole(Role.Assistant));
             }
 
             if (!userManager.Users.Any())
@@ -33,11 +35,10 @@ public class InitialData
                     EmailConfirmed = true,
                     PhoneNumber = "1234567890",
                     PhoneNumberConfirmed = true,
-                    UserTypes = new List<UserType> { UserType.Manager, UserType.Administrative },
                     AvatarUrl = "https://firebasestorage.googleapis.com/v0/b/edificacion-app.appspot.com/o/vaxidrez.jpg?alt=media&token=14a28860-d149-461e-9c25-9774d7ac1b24"
                 };
                 await userManager.CreateAsync(userAdmin, "Walter@960");
-                await userManager.AddToRolesAsync(userAdmin, new string[] { Role.Manager, Role.Administrative });
+                await userManager.AddToRolesAsync(userAdmin, new string[] { Role.Owner });
 
                 var user = new User
                 {
@@ -48,7 +49,6 @@ public class InitialData
                     EmailConfirmed = true,
                     PhoneNumber = "1234567890",
                     PhoneNumberConfirmed = true,
-                    UserTypes = new List<UserType> { UserType.Administrative },
                     AvatarUrl = "https://firebasestorage.googleapis.com/v0/b/edificacion-app.appspot.com/o/avatar-1.webp?alt=media&token=58da3007-ff21-494d-a85c-25ffa758ff6d"
                 };
 

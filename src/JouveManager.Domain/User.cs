@@ -8,5 +8,4 @@ public class User : IdentityUser
     public string LastName { get; set; }
     public string FullName => $"{FirstName} {LastName}";
     public string AvatarUrl { get; set; } = string.Empty;
-    public ICollection<UserType> UserTypes { get; set; }
 }

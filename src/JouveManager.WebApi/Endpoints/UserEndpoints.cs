@@ -8,7 +8,7 @@ public static class UserEndpoints
 {
     public static IEndpointRouteBuilder RegisterUserEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
     {
-        var group = endpointRouteBuilder.MapGroup("/api/users");
+        var group = endpointRouteBuilder.MapGroup("/users");
 
         group.MapPost("/login", async ([FromBody] LoginUserCommand request, IMediator mediator, CancellationToken cancellationToken) =>
         {

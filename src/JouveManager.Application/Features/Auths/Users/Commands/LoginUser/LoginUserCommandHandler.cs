@@ -27,14 +27,9 @@ public class LoginUserCommandHandler(
             throw new Exception("Username not found and/or password incorrect");
         }
 
-        if (user.UserTypes == null || !user.UserTypes.Any())
-        {
-            throw new UnauthorizedAccessException("User has no assigned user types");
-        }
-
         var roles = await userManager.GetRolesAsync(user);
 
-        var token = authService.CreateToken(user, roles, user.UserTypes);
+        var token = authService.CreateToken(user, roles);
 
         var authResponse = new AuthResponseDto()
         {
@@ -46,7 +41,6 @@ public class LoginUserCommandHandler(
             UserName = user.UserName!,
             AvatarUrl = user.AvatarUrl!,
             Token = token,
-            UserTypes = user.UserTypes.Select(ut => ut.ToString()).ToList(),
             Roles = roles.ToList()
         };
 

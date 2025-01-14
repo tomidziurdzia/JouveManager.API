@@ -14,7 +14,7 @@ public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtS
 {
     private JwtSettings _jwtSettings { get; } = jwtSettings.Value;
 
-    public string CreateToken(User user)
+    public string CreateToken(User user, IList<string> roles)
     {
         var claims = new List<Claim> {
             new Claim(JwtRegisteredClaimNames.NameId, user.UserName!),

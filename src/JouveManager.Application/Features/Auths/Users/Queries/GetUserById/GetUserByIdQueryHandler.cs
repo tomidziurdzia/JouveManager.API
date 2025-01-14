@@ -15,7 +15,7 @@ public class GetUserByIdQueryHandler(UserManager<User> userManager) : IQueryHand
             throw new Exception("User not found");
         }
 
-        //var roles = await userManager.GetRolesAsync(user);
+        var roles = await userManager.GetRolesAsync(user);
 
         return new AuthResponseDto
         {
@@ -25,8 +25,7 @@ public class GetUserByIdQueryHandler(UserManager<User> userManager) : IQueryHand
             Email = user.Email!,
             UserName = user.UserName!,
             AvatarUrl = user.AvatarUrl!,
-            PhoneNumber = user.PhoneNumber!,
-            //Roles = roles
+            Roles = roles
         };
     }
 }

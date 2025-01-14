@@ -5,5 +5,4 @@ namespace JouveManager.Application.Features.Auths.Users.Queries.GetUserByToken;
 
 public class GetUserByToken : IQuery<AuthResponseDto>
 {
-    
 }

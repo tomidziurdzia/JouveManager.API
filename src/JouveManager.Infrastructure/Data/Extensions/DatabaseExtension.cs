@@ -23,21 +23,15 @@ public static class DatabaseExtension
     {
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-        // roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        await SeedUserAsync(userManager,
-            //roleManager,
-            loggerFactory);
+        await SeedUserAsync(userManager, roleManager, loggerFactory);
     }
 
     private static async Task SeedUserAsync(
-        UserManager<User> userManager,
-       // RoleManager<IdentityRole> roleManager,
-        ILoggerFactory loggerFactory
+        UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ILoggerFactory loggerFactory
     )
     {
-        await InitialData.LoadDataAsync(userManager, 
-            //roleManager, 
-            loggerFactory);
+        await InitialData.LoadDataAsync(userManager, roleManager, loggerFactory);
     }
 }

@@ -10,7 +10,7 @@ public class RegisterUserCommand : ICommand<AuthResponseDto>
     public required string Email { get; set; }
     public required string Password { get; set; }
     public required string ConfirmPassword { get; set; }
-    //public required string Role { get; set; }
+    public required string Role { get; set; }
     public string? AvatarUrl { get; set; }
     public string? PhoneNumber { get; set; }
 }

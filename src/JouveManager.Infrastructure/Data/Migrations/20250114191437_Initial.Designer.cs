@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JouveManager.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250114183954_Initial")]
+    [Migration("20250114191437_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

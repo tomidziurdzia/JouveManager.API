@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace JouveManager.Infrastructure.Services;
+namespace JouveManager.Infrastructure.Services.Auth;
 
 public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtSettings> jwtSettings) : IAuthService
 {
@@ -21,6 +21,8 @@ public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtS
             new Claim("userId", user.Id),
             new Claim("email", user.Email!),
         };
+        
+        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

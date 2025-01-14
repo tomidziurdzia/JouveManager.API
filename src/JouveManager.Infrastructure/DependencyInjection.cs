@@ -1,7 +1,10 @@
 ﻿using JouveManager.Application.Contracts.Identity;
 using JouveManager.Application.Models.Token;
+using JouveManager.Domain;
 using JouveManager.Infrastructure.Data;
 using JouveManager.Infrastructure.Services;
+using JouveManager.Infrastructure.Services.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,12 +17,19 @@ public static class DependencyInjection
     {
         services.AddTransient<IAuthService, AuthService>();
 
-        services.AddDbContext<ApplicationDbContext>(options => 
+        services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
             )
         );
-        
+
+        services.AddIdentityCore<User>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddSignInManager<SignInManager<User>>()
+            .AddDefaultTokenProviders()
+            .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<User, IdentityRole>>();
+
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         return services;

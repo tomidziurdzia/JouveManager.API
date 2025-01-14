@@ -16,7 +16,9 @@ public class GetUserByTokenHandler(UserManager<User> userManager, IAuthService a
             throw new Exception("User is not authenticated");
         }
         
-        //var roles = await userManager.GetRolesAsync(user);
+        var roles = await userManager.GetRolesAsync(user);
+        
+        var token = authService.CreateToken(user, roles);
         
         return new AuthResponseDto
         {
@@ -24,9 +26,9 @@ public class GetUserByTokenHandler(UserManager<User> userManager, IAuthService a
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email!,
-            Token = authService.CreateToken(user
-                //, roles
-                ),
+            UserName = user.UserName!,
+            Token = token,
+            Roles = roles
         };
     }
 }

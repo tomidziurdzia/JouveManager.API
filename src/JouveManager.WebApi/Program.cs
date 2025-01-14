@@ -1,12 +1,10 @@
 using System.Text;
 using JouveManager.Application;
-using JouveManager.Domain;
 using JouveManager.Infrastructure;
-using JouveManager.Infrastructure.Data;
 using JouveManager.Infrastructure.Data.Extensions;
 using JouveManager.WebApi;
+using JouveManager.WebApi.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,14 +32,8 @@ builder.Services
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddIdentityCore<User>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddSignInManager<SignInManager<User>>()
-    .AddDefaultTokenProviders()
-    .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<User>>();
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(opt => 
+    .AddJwtBearer(opt =>
     {
         opt.TokenValidationParameters = new TokenValidationParameters
         {

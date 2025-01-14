@@ -6,6 +6,8 @@ public interface IAuthService
 {
     string GetSessionUser();
 
-    string CreateToken(User user, IList<string> roles);
+    string CreateToken(User user
+        //,IList<string> roles
+        );
 }
 

@@ -11,6 +11,6 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
         RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required");
         RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required");
         RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Confirm password is required");
-        RuleFor(x => x.Role).NotEmpty().WithMessage("Role is required");
+        //RuleFor(x => x.Role).NotEmpty().WithMessage("Role is required");
     }
 }

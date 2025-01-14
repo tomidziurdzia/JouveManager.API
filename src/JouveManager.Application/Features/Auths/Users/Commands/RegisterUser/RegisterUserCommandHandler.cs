@@ -36,24 +36,23 @@ public class RegisterUserCommandHandler(UserManager<User> userManager, IAuthServ
             throw new Exception("Failed to create user");
         }
 
-        await userManager.AddToRoleAsync(user, request.Role);
+        //await userManager.AddToRoleAsync(user, request.Role);
 
-        var roles = await userManager.GetRolesAsync(user);
+        //var roles = await userManager.GetRolesAsync(user);
 
-        var token = authService.CreateToken(user, roles);
+        //var token = authService.CreateToken(user, roles);
 
         return new AuthResponseDto()
         {
             Id = user.Id,
             FirstName = user.FirstName!,
             LastName = user.LastName!,
-            FullName = user.FullName!,
             Email = user.Email!,
             UserName = user.UserName!,
             AvatarUrl = user.AvatarUrl!,
-            Token = token,
+            Token = authService.CreateToken(user),
             PhoneNumber = request.PhoneNumber!,
-            Roles = roles.ToList()
+            //Roles = roles.ToList()
         };
     }
 }

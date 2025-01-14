@@ -27,21 +27,20 @@ public class LoginUserCommandHandler(
             throw new Exception("Username not found and/or password incorrect");
         }
 
-        var roles = await userManager.GetRolesAsync(user);
+        //var roles = await userManager.GetRolesAsync(user);
 
-        var token = authService.CreateToken(user, roles);
+        //var token = authService.CreateToken(user, roles);
 
         var authResponse = new AuthResponseDto()
         {
             Id = user.Id,
             FirstName = user.FirstName!,
             LastName = user.LastName!,
-            FullName = user.FullName!,
             Email = user.Email!,
             UserName = user.UserName!,
             AvatarUrl = user.AvatarUrl!,
-            Token = token,
-            Roles = roles.ToList()
+            Token = authService.CreateToken(user),
+            //Roles = roles.ToList()
         };
 
         return authResponse;

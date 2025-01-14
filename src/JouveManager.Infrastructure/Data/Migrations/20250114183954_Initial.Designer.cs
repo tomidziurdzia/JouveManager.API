@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JouveManager.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250107191407_Initial")]
+    [Migration("20250114183954_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -85,9 +85,6 @@ namespace JouveManager.Infrastructure.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
-
-                    b.PrimitiveCollection<int[]>("UserTypes")
-                        .HasColumnType("integer[]");
 
                     b.HasKey("Id");
 

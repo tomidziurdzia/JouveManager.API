@@ -2,6 +2,7 @@ using JouveManager.Application.DTOs.User;
 using JouveManager.Application.Features.Auths.Users.Commands.LoginUser;
 using JouveManager.Application.Features.Auths.Users.Commands.RegisterUser;
 using JouveManager.Application.Features.Auths.Users.Queries.GetUserById;
+using JouveManager.Application.Features.Auths.Users.Queries.GetUserByToken;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,6 @@ public static class UserEndpoints
 
         group.MapPost("/login", async ([FromBody] LoginUserCommand request, IMediator mediator, CancellationToken cancellationToken) =>
         {
-            Console.WriteLine(request);
             var result = await mediator.Send(request, cancellationToken);
             return Results.Ok(result);
         })
@@ -40,6 +40,16 @@ public static class UserEndpoints
         .WithName("GetUserById")
             .Produces<AuthResponseDto>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status404NotFound);
+        
+        group.MapGet("/me", async (IMediator mediator, CancellationToken cancellationToken) =>
+            {
+                var result = await mediator.Send(new GetUserByToken(), cancellationToken);
+                return Results.Ok(result);
+            })
+            .WithName("GetUserByToken")
+            .Produces<AuthResponseDto>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .RequireAuthorization();
 
         return endpointRouteBuilder;
     }

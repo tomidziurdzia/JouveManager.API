@@ -9,20 +9,20 @@ public class InitialData
 {
     public static async Task LoadDataAsync(
         UserManager<User> userManager,
-        RoleManager<IdentityRole> roleManager,
+        //RoleManager<IdentityRole> roleManager,
         ILoggerFactory loggerFactory
     )
     {
         try
         {
-            if (!roleManager.Roles.Any())
+            /*if (!roleManager.Roles.Any())
             {
                 await roleManager.CreateAsync(new IdentityRole(Role.Owner));
                 await roleManager.CreateAsync(new IdentityRole(Role.Manager));
                 await roleManager.CreateAsync(new IdentityRole(Role.Administrative));
                 await roleManager.CreateAsync(new IdentityRole(Role.Driver));
                 await roleManager.CreateAsync(new IdentityRole(Role.Assistant));
-            }
+            }*/
 
             if (!userManager.Users.Any())
             {
@@ -31,27 +31,21 @@ public class InitialData
                     FirstName = "Tomas",
                     LastName = "Dziurdzia",
                     UserName = "tomidziurdzia",
-                    Email = "tomidziurdzia@gmail.com",
-                    EmailConfirmed = true,
-                    PhoneNumber = "1234567890",
-                    PhoneNumberConfirmed = true,
+                    Email = "tomidziurdzia@gmail.com"
                 };
                 await userManager.CreateAsync(userAdmin, "Walter@960");
-                await userManager.AddToRolesAsync(userAdmin, new string[] { Role.Owner });
+                //await userManager.AddToRolesAsync(userAdmin, new string[] { Role.Owner });
 
                 var user = new User
                 {
-                    FirstName = "Ximena",
+                    FirstName = "Xime",
                     LastName = "Apel",
-                    UserName = "ximenaapel",
-                    Email = "ximena.apel@gmail.com",
-                    EmailConfirmed = true,
-                    PhoneNumber = "1234567890",
-                    PhoneNumberConfirmed = true,
+                    UserName = "ximeapel",
+                    Email = "ximeapel@gmail.com"
                 };
 
                 await userManager.CreateAsync(user, "Walter@960");
-                await userManager.AddToRoleAsync(user, Role.Administrative);
+                //await userManager.AddToRoleAsync(user, Role.Administrative);
             }
 
         }

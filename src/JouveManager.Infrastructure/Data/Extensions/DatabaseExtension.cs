@@ -1,12 +1,11 @@
 using JouveManager.Domain;
-using JouveManager.Infrastructure.Data.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace JouveManager.Infrastructure.Data;
+namespace JouveManager.Infrastructure.Data.Extensions;
 
 public static class DatabaseExtension
 {
@@ -24,17 +23,21 @@ public static class DatabaseExtension
     {
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        // roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        await SeedUserAsync(userManager, roleManager, loggerFactory);
+        await SeedUserAsync(userManager,
+            //roleManager,
+            loggerFactory);
     }
 
     private static async Task SeedUserAsync(
         UserManager<User> userManager,
-        RoleManager<IdentityRole> roleManager,
+       // RoleManager<IdentityRole> roleManager,
         ILoggerFactory loggerFactory
     )
     {
-        await InitialData.LoadDataAsync(userManager, roleManager, loggerFactory);
+        await InitialData.LoadDataAsync(userManager, 
+            //roleManager, 
+            loggerFactory);
     }
 }

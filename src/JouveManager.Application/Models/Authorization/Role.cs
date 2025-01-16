@@ -1,5 +1,3 @@
-using System;
-
 namespace JouveManager.Application.Models.Authorization;
 
 public class Role

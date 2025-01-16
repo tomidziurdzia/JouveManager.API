@@ -9,5 +9,4 @@ public class UpdateVehicleDto
     public string? Model { get; set; }
     public string? ImageUrl { get; set; }
     public TypeVehicle? Type { get; set; }
-    public bool? RequiresTrailer { get; set; }
 }

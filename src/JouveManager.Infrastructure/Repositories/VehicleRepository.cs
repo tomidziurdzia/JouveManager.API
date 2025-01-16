@@ -12,6 +12,9 @@ public class VehicleRepository(ApplicationDbContext context) : IVehicleRepositor
     {
         try
         {
+            var vehicleExist = await context.Vehicles.FirstOrDefaultAsync(v => v.LicensePlate == vehicle.LicensePlate, cancellationToken);
+            if (vehicleExist != null) throw new BadRequestException("Vehicle already exists");
+
             await context.Vehicles.AddAsync(vehicle, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
         }

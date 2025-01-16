@@ -52,7 +52,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseApiServices();
-app.RegisterUserEndpoints();
+app.RegisterUserEndpoints()
+    .RegisterVehicleEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

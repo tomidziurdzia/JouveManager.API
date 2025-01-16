@@ -10,4 +10,5 @@ public class SemiTrailer : Entity<Guid>
     public string Model { get; set; }
     public string ImageUrl { get; set; }
     public TypeSemiTrailer Type { get; set; }
+    public virtual ICollection<Travel> Travels { get; set; } = new List<Travel>();
 }

@@ -3,20 +3,28 @@ using JouveManager.Domain;
 using JouveManager.Domain.Abstractions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace JouveManager.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options,
+        IHttpContextAccessor httpContextAccessor) : base(options)
     {
+        _httpContextAccessor = httpContextAccessor;
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
-        var userName = "system";
+        var username = _httpContextAccessor.HttpContext!.User?.Claims?
+           .FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
         foreach (var entry in ChangeTracker.Entries<Entity<Guid>>())
         {
@@ -24,12 +32,12 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
             {
                 case EntityState.Added:
                     entry.Entity.CreatedAt = DateTime.Now;
-                    entry.Entity.CreatedBy = userName;
+                    entry.Entity.CreatedBy = username;
                     break;
 
                 case EntityState.Modified:
                     entry.Entity.LastModified = DateTime.Now;
-                    entry.Entity.LastModifiedBy = userName;
+                    entry.Entity.LastModifiedBy = username;
                     break;
             }
         }

@@ -53,7 +53,8 @@ var app = builder.Build();
 
 app.UseApiServices();
 app.RegisterUserEndpoints()
-    .RegisterVehicleEndpoints();
+    .RegisterVehicleEndpoints()
+    .RegisterSemiTrailerEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

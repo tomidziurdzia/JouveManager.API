@@ -1,5 +1,4 @@
 using FluentValidation;
-using JouveManager.Domain.Enum;
 
 namespace JouveManager.Application.Features.Vehicles.Commands.CreateVehicle;
 

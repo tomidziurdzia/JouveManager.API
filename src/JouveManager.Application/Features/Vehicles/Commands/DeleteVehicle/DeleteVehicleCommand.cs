@@ -1,4 +1,3 @@
-
 using JouveManager.Application.CQRS;
 using MediatR;
 

@@ -19,6 +19,9 @@ public static class DependencyInjection
         services.AddTransient<IAuthService, AuthService>();
         services.AddTransient<IVehicleRepository, VehicleRepository>();
         services.AddTransient<ISemiTrailerRepository, SemiTrailerRepository>();
+        services.AddTransient<IShipmentRepository, ShipmentRepository>();
+        services.AddTransient<ITravelRepository, TravelRepository>();
+        services.AddTransient<ITravelShipmentRepository, TravelShipmentRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),

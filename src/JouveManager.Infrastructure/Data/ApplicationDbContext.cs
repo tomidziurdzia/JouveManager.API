@@ -49,7 +49,7 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
     public required DbSet<SemiTrailer> SemiTrailers { get; set; }
     public required DbSet<Travel> Travels { get; set; }
     public required DbSet<Shipment> Shipments { get; set; }
-
+    public required DbSet<TravelShipment> TravelShipments { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

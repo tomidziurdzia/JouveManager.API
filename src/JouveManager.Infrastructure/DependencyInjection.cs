@@ -4,7 +4,6 @@ using JouveManager.Domain;
 using JouveManager.Domain.Repositories;
 using JouveManager.Infrastructure.Data;
 using JouveManager.Infrastructure.Repositories;
-using JouveManager.Infrastructure.Services;
 using JouveManager.Infrastructure.Services.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +18,7 @@ public static class DependencyInjection
     {
         services.AddTransient<IAuthService, AuthService>();
         services.AddTransient<IVehicleRepository, VehicleRepository>();
+        services.AddTransient<ISemiTrailerRepository, SemiTrailerRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),

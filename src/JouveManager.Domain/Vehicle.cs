@@ -9,6 +9,6 @@ public class Vehicle : Entity<Guid>
     public required string Brand { get; set; }
     public required string Model { get; set; }
     public required string ImageUrl { get; set; }
-    public TypeVehicle Type { get; set; }
+    public required TypeVehicle Type { get; set; }
     public virtual ICollection<Travel> Travels { get; set; } = new List<Travel>();
 }

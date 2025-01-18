@@ -55,7 +55,8 @@ app.UseApiServices();
 app.RegisterUserEndpoints()
     .RegisterVehicleEndpoints()
     .RegisterSemiTrailerEndpoints()
-    .RegisterShipmentEndpoints();
+    .RegisterShipmentEndpoints()
+    .RegisterTravelEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

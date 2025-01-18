@@ -4,6 +4,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using JouveManager.Application.Features.Travels.Commands.UpdateTravel;
 using JouveManager.Application.Features.Travels.Commands.DeleteTravel;
+using JouveManager.Application.Features.Travels.Queries.GetTravels;
+using JouveManager.Application.Features.Travels.Queries.GetTravel;
 
 namespace JouveManager.WebApi.Endpoints;
 
@@ -31,6 +33,7 @@ public static class TravelEndpoints
         })
         .WithName("UpdateTravel")
         .Produces(StatusCodes.Status204NoContent)
+        .ProducesProblem(StatusCodes.Status404NotFound)
         .RequireAuthorization();
 
         group.MapDelete("/{id}", async ([FromRoute] Guid id, IMediator mediator, CancellationToken cancellationToken) =>
@@ -40,6 +43,27 @@ public static class TravelEndpoints
         })
         .WithName("DeleteTravel")
         .Produces(StatusCodes.Status204NoContent)
+        .ProducesProblem(StatusCodes.Status404NotFound)
+        .RequireAuthorization();
+
+        group.MapGet("/", async (IMediator mediator, CancellationToken cancellationToken) =>
+        {
+            var result = await mediator.Send(new GetTravelsQuery(), cancellationToken);
+            return Results.Ok(result);
+        })
+        .WithName("GetTravels")
+        .Produces<IEnumerable<TravelDto>>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status404NotFound)
+        .RequireAuthorization();
+
+        group.MapGet("/{id}", async ([FromRoute] Guid id, IMediator mediator, CancellationToken cancellationToken) =>
+        {
+            var result = await mediator.Send(new GetTravelQuery(id), cancellationToken);
+            return Results.Ok(result);
+        })
+        .WithName("GetTravel")
+        .Produces<TravelDto>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status404NotFound)
         .RequireAuthorization();
 
         return endpointRouteBuilder;

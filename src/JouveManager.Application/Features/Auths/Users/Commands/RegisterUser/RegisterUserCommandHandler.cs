@@ -12,7 +12,6 @@ public class RegisterUserCommandHandler(UserManager<User> userManager, IAuthServ
 {
     public async Task<AuthResponseDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-
         var userExists = await userManager.FindByEmailAsync(request.Email);
         if (userExists is not null)
         {

@@ -1,10 +1,12 @@
 using System.Text;
 using JouveManager.Application;
+using JouveManager.Application.Models.Authorization;
 using JouveManager.Infrastructure;
 using JouveManager.Infrastructure.Data.Extensions;
 using JouveManager.WebApi;
 using JouveManager.WebApi.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,7 +52,6 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseApiServices();
 app.RegisterUserEndpoints()
     .RegisterVehicleEndpoints()

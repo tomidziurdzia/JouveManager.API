@@ -7,13 +7,4 @@ public class Role
     public const string Administrative = nameof(Administrative);
     public const string Driver = nameof(Driver);
     public const string Assistant = nameof(Assistant);
-
-    public static readonly List<string> AllRoles = new()
-    {
-        Owner,
-        Manager,
-        Administrative,
-        Driver,
-        Assistant
-    };
 }

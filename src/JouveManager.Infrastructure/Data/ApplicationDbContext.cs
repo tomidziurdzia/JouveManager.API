@@ -21,10 +21,10 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
         AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
     }
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var username = _httpContextAccessor.HttpContext!.User?.Claims?
-           .FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+        var username = _httpContextAccessor.HttpContext?.User?.Claims?
+            .FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value ?? "system";
 
         foreach (var entry in ChangeTracker.Entries<Entity<Guid>>())
         {

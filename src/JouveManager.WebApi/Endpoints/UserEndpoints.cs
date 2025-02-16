@@ -3,6 +3,7 @@ using JouveManager.Application.Features.Auths.Users.Commands.LoginUser;
 using JouveManager.Application.Features.Auths.Users.Commands.RegisterUser;
 using JouveManager.Application.Features.Auths.Users.Queries.GetUserById;
 using JouveManager.Application.Features.Auths.Users.Queries.GetUserByToken;
+using JouveManager.Application.Features.Auths.Users.Queries.GetUsers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +43,7 @@ public static class UserEndpoints
             .WithName("GetUserById")
             .Produces<AuthResponseDto>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status404NotFound);
-        
+
         group.MapGet("/me", async (IMediator mediator, CancellationToken cancellationToken) =>
             {
                 var result = await mediator.Send(new GetUserByToken(), cancellationToken);
@@ -50,6 +51,16 @@ public static class UserEndpoints
             })
             .WithName("GetUserByToken")
             .Produces<AuthResponseDto>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .RequireAuthorization();
+
+        group.MapGet("/", async (IMediator mediator, CancellationToken cancellationToken) =>
+            {
+                var result = await mediator.Send(new GetUserQuery(), cancellationToken);
+                return Results.Ok(result);
+            })
+            .WithName("GetUsers")
+            .Produces<IEnumerable<UserDto>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status404NotFound)
             .RequireAuthorization();
 

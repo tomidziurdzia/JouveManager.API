@@ -32,13 +32,19 @@ public class RegisterUserCommandHandler(UserManager<User> userManager, IAuthServ
 
         if (!result.Succeeded)
         {
-            throw new Exception("Failed to create user");
+            var errors = result.Errors.Select(e => e.Description);
+            throw new BadRequestException($"Failed to create user: {string.Join(", ", errors)}");
         }
 
-        await userManager.AddToRoleAsync(user, request.Role);
+        var roleResult = await userManager.AddToRoleAsync(user, request.Role);
+
+        if (!roleResult.Succeeded)
+        {
+            await userManager.DeleteAsync(user);
+            throw new BadRequestException($"Failed to assign role: {request.Role}");
+        }
 
         var roles = await userManager.GetRolesAsync(user);
-
         var token = authService.CreateToken(user, roles);
 
         return new AuthResponseDto()

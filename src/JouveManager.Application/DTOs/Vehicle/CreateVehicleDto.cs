@@ -3,7 +3,7 @@ using JouveManager.Domain.Enum;
 
 namespace JouveManager.Application.DTOs.Vehicle;
 
-public class CreateSemiTrailerDto
+public class CreateVehicleDto
 {
     public string? LicensePlate { get; set; }
     public string? Brand { get; set; }

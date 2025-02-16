@@ -24,7 +24,7 @@ public class LoginUserCommandHandler(
 
         if (!result.Succeeded)
         {
-            throw new Exception("Username not found and/or password incorrect");
+            throw new Exception("Email not found and/or password incorrect");
         }
 
         var roles = await userManager.GetRolesAsync(user);

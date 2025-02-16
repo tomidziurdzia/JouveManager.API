@@ -11,15 +11,14 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var jouveManagerUrl = builder.Configuration["JouveManagerUrl"];
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", builder =>
     {
         builder
-            .WithOrigins(
-                "https://financestock.vercel.app",
-                "http://localhost:3000"
-            )
+            .WithOrigins(jouveManagerUrl!)
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
@@ -50,6 +49,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+app.UseCors("AllowSpecificOrigins");
 
 // Configure the HTTP request pipeline.
 app.UseApiServices();

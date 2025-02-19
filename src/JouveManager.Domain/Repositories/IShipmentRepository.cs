@@ -6,5 +6,6 @@ public interface IShipmentRepository
     Task<Shipment> Get(Guid id, CancellationToken cancellationToken);
     Task Create(Shipment shipment, CancellationToken cancellationToken);
     Task Update(Shipment shipment, CancellationToken cancellationToken);
-    Task Delete(Guid id, CancellationToken cancellationToken);
+    Task Delete(Guid id, CancellationToken cancellationToken); 
+    Task<IEnumerable<Shipment>> GetShipmentsByDate(DateTime requestDate, CancellationToken cancellationToken);
 }

@@ -4,6 +4,7 @@ using JouveManager.Application.Features.Shipments.Command.DeleteShipment;
 using JouveManager.Application.Features.Shipments.Command.UpdateShipment;
 using JouveManager.Application.Features.Shipments.Queries.GetShipment;
 using JouveManager.Application.Features.Shipments.Queries.GetShipments;
+using JouveManager.Application.Features.Shipments.Queries.GetShipmentsByDate;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,6 +62,16 @@ public static class ShipmentEndpoints
             return Results.Ok(result);
         })
         .WithName("GetShipments")
+        .Produces<IEnumerable<ShipmentDto>>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .RequireAuthorization();
+
+        group.MapGet("date/{date}", async ([FromRoute] DateTime date, IMediator mediator, CancellationToken cancellationToken) =>
+        {
+            var result = await mediator.Send(new GetShipmentByDateQuery(date), cancellationToken);
+            return Results.Ok(result);
+        })
+        .WithName("GetShipmentsByDate")
         .Produces<IEnumerable<ShipmentDto>>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .RequireAuthorization();

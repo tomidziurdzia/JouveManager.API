@@ -7,4 +7,5 @@ public interface ITravelRepository
     Task Create(Travel travel, CancellationToken cancellationToken);
     Task Update(Travel travel, CancellationToken cancellationToken);
     Task Delete(Guid id, CancellationToken cancellationToken);
+    Task<IEnumerable<Travel>> GetTravelsByDate(DateTime date, CancellationToken cancellationToken);
 }

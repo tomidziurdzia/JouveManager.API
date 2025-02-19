@@ -6,6 +6,7 @@ using JouveManager.Application.Features.Travels.Commands.UpdateTravel;
 using JouveManager.Application.Features.Travels.Commands.DeleteTravel;
 using JouveManager.Application.Features.Travels.Queries.GetTravels;
 using JouveManager.Application.Features.Travels.Queries.GetTravel;
+using JouveManager.Application.Features.Travels.Queries.GetTravelsByDate;
 
 namespace JouveManager.WebApi.Endpoints;
 
@@ -65,6 +66,17 @@ public static class TravelEndpoints
         .Produces<TravelDto>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .RequireAuthorization();
+
+        group.MapGet("date/{date}", async ([FromRoute] DateTime date, IMediator mediator, CancellationToken cancellationToken) =>
+        {
+            var result = await mediator.Send(new GetTravelsByDateQuery(date), cancellationToken);
+            return Results.Ok(result);
+        })
+        .WithName("GetTravelsByDate")
+        .Produces<IEnumerable<TravelDto>>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .RequireAuthorization();
+
 
         return endpointRouteBuilder;
     }

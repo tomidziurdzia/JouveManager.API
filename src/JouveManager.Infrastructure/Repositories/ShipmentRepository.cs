@@ -82,4 +82,19 @@ public class ShipmentRepository(ApplicationDbContext context) : IShipmentReposit
             throw new Exception($"Error updating shipment: {ex.Message}");
         }
     }
+
+    public async Task<IEnumerable<Shipment>> GetShipmentsByDate(DateTime date, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await context.Shipments
+                .Where(s => s.ScheduledDate.Date == date.Date)
+                .OrderByDescending(s => s.ScheduledDate)
+                .ToListAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error getting shipments by date: {ex.Message}");
+        }
+    }
 }

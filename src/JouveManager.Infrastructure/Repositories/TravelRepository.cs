@@ -90,4 +90,24 @@ public class TravelRepository(ApplicationDbContext context) : ITravelRepository
             throw new Exception($"Error updating travel: {ex.Message}");
         }
     }
+
+    public async Task<IEnumerable<Travel>> GetTravelsByDate(DateTime date, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await context.Travels
+                .Include(t => t.Driver)
+                .Include(t => t.Assistant)
+                .Include(t => t.Vehicle)
+                .Include(t => t.SemiTrailer)
+                .Include(t => t.TravelShipments)
+                .ThenInclude(ts => ts.Shipment)
+                .Where(t => t.Date.Date == date.Date)
+                .ToListAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error getting travels by date: {ex.Message}");
+        }
+    }
 }

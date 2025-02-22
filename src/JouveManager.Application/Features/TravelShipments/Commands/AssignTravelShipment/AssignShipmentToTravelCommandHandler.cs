@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using JouveManager.Application.CQRS;
-using JouveManager.Application.DTOs.TravelShipment;
 using JouveManager.Domain.Repositories;
 using MediatR;
 
 namespace JouveManager.Application.Features.TravelShipments.Commands.AssignTravelShipment;
 
-public class AssignShipmentToTravelCommandHandler(ITravelShipmentRepository travelShipmentRepository) : ICommandHandler<AssignShipmentToTravelCommand, Unit>
+public class AssignShipmentToTravelCommandHandler(ITravelShipmentRepository travelShipmentRepository, IShipmentRepository shipmentRepository) : ICommandHandler<AssignShipmentToTravelCommand, Unit>
 {
     public async Task<Unit> Handle(AssignShipmentToTravelCommand request, CancellationToken cancellationToken)
     {
@@ -16,6 +15,12 @@ public class AssignShipmentToTravelCommandHandler(ITravelShipmentRepository trav
         {
             throw new ValidationException($"Cannot assign Shipment {request.ShipmentId} to a new Travel because it is already assigned to another active Travel.");
         }
+
+        var shipment = await shipmentRepository.Get(request.ShipmentId, cancellationToken);
+        shipment.IsAssigned = true;
+        await shipmentRepository.Update(shipment, cancellationToken);
+        
+        Console.WriteLine(shipment);
 
         await travelShipmentRepository.AssignShipmentToTravel(request.ShipmentId, request.TravelId, cancellationToken);
 

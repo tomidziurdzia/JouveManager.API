@@ -18,6 +18,7 @@ public class GetShipmentsQueryHandler(IShipmentRepository shipmentRepository) : 
             From = s.From,
             To = s.To,
             Description = s.Description,
+            IsAssigned = s.IsAssigned,
             ScheduledDate = s.ScheduledDate,
         });
     }

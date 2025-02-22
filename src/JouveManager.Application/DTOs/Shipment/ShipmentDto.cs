@@ -8,4 +8,5 @@ public class ShipmentDto
     public required string To { get; set; }
     public required string Description { get; set; }
     public DateTime ScheduledDate { get; set; }
+    public bool IsAssigned { get; set; }
 }

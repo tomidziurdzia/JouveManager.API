@@ -21,17 +21,18 @@ public static class DatabaseExtension
 
     private static async Task SeedAsync(IServiceProvider serviceProvider)
     {
+        var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        await SeedUserAsync(userManager, roleManager, loggerFactory);
+        await SeedUserAsync(context, userManager, roleManager, loggerFactory);
     }
 
-    private static async Task SeedUserAsync(
+    private static async Task SeedUserAsync(ApplicationDbContext context,
         UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ILoggerFactory loggerFactory
     )
     {
-        await InitialData.LoadDataAsync(userManager, roleManager, loggerFactory);
+        await InitialData.LoadDataAsync(context, userManager, roleManager, loggerFactory);
     }
 }

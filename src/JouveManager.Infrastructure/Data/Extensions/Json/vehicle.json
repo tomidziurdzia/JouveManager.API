@@ -1,0 +1,122 @@
+[
+  {
+    "LicensePlate": "CHS-001",
+    "Brand": "Volvo",
+    "Model": "FH16",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "CHS-002",
+    "Brand": "Scania",
+    "Model": "R500",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "CHS-003",
+    "Brand": "Mercedes",
+    "Model": "Actros",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "CHS-004",
+    "Brand": "MAN",
+    "Model": "TGX",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "CHS-005",
+    "Brand": "DAF",
+    "Model": "XF",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "CHS-006",
+    "Brand": "Iveco",
+    "Model": "Stralis",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "CHS-007",
+    "Brand": "Kenworth",
+    "Model": "T680",
+    "Type": "Chassis"
+  },
+  {
+    "LicensePlate": "TRK-001",
+    "Brand": "Volvo",
+    "Model": "VNL",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRK-002",
+    "Brand": "Peterbilt",
+    "Model": "579",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRK-003",
+    "Brand": "Freightliner",
+    "Model": "Cascadia",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRK-004",
+    "Brand": "Mack",
+    "Model": "Anthem",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRK-005",
+    "Brand": "Kenworth",
+    "Model": "T680",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRK-006",
+    "Brand": "Volvo",
+    "Model": "VNL",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRK-007",
+    "Brand": "Peterbilt",
+    "Model": "579",
+    "Type": "Truck"
+  },
+  {
+    "LicensePlate": "TRU-001",
+    "Brand": "Volvo",
+    "Model": "VNR",
+    "Type": "TractorUnit"
+  },
+  {
+    "LicensePlate": "TRU-002",
+    "Brand": "Scania",
+    "Model": "S-Series",
+    "Type": "TractorUnit"
+  },
+  {
+    "LicensePlate": "TRU-003",
+    "Brand": "Mercedes",
+    "Model": "Actros",
+    "Type": "TractorUnit"
+  },
+  {
+    "LicensePlate": "TRU-004",
+    "Brand": "MAN",
+    "Model": "TGX",
+    "Type": "TractorUnit"
+  },
+  {
+    "LicensePlate": "TRU-005",
+    "Brand": "DAF",
+    "Model": "XF",
+    "Type": "TractorUnit"
+  },
+  {
+    "LicensePlate": "TRU-006",
+    "Brand": "Iveco",
+    "Model": "Stralis",
+    "Type": "TractorUnit"
+  }
+]

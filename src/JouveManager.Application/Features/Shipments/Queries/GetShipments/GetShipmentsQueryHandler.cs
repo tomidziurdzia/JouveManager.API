@@ -9,7 +9,9 @@ public class GetShipmentsQueryHandler(IShipmentRepository shipmentRepository) : 
     public async Task<IEnumerable<ShipmentDto>> Handle(GetShipmentsQuery request, CancellationToken cancellationToken)
     {
         var shipments = await shipmentRepository.GetAll(cancellationToken);
-        return shipments.Select(s => new ShipmentDto
+        return shipments
+            .OrderBy(shipment => shipment.ScheduledDate)
+            .Select(s => new ShipmentDto
         {
             Id = s.Id,
             CustomerName = s.CustomerName,

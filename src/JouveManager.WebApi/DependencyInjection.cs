@@ -10,7 +10,7 @@ public static class DependencyInjection
     {
         services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddHealthChecks()
-            .AddNpgSql(configuration.GetConnectionString("DefaultConnection")!);
+            .AddNpgSql(configuration.GetConnectionString("DevelopmentConnection")!);
 
 
         return services;

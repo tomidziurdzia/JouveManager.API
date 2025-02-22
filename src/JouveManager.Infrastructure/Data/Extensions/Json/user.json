@@ -1,0 +1,178 @@
+[
+  {
+    "FirstName": "Tomas",
+    "LastName": "Dziurdzia",
+    "UserName": "tomidziurdzia",
+    "Email": "tomidziurdzia@gmail.com",
+    "Password": "Walter@960",
+    "Roles": ["Owner", "Manager"]
+  },
+  {
+    "FirstName": "Xime",
+    "LastName": "Apel",
+    "UserName": "ximeapel",
+    "Email": "ximeapel@gmail.com",
+    "Password": "Walter@960",
+    "Roles": ["Administrative"]
+  },
+  {
+    "FirstName": "Juan",
+    "LastName": "Martinez",
+    "UserName": "juanmartinez",
+    "Email": "juan.martinez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Carlos",
+    "LastName": "Ramirez",
+    "UserName": "carlosramirez",
+    "Email": "carlos.ramirez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Miguel",
+    "LastName": "Hernandez",
+    "UserName": "miguelhernandez",
+    "Email": "miguel.hernandez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Luis",
+    "LastName": "Garcia",
+    "UserName": "luisgarcia",
+    "Email": "luis.garcia@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Jorge",
+    "LastName": "Lopez",
+    "UserName": "jorgelopez",
+    "Email": "jorge.lopez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Pedro",
+    "LastName": "Gonzalez",
+    "UserName": "pedrogonzalez",
+    "Email": "pedro.gonzalez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Sergio",
+    "LastName": "Martinez",
+    "UserName": "sergiomartinez",
+    "Email": "sergio.martinez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Fernando",
+    "LastName": "Diaz",
+    "UserName": "fernandodiaz",
+    "Email": "fernando.diaz@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Ricardo",
+    "LastName": "Alvarez",
+    "UserName": "ricardosalvarez",
+    "Email": "ricardo.alvarez@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Diego",
+    "LastName": "Castro",
+    "UserName": "diegocastro",
+    "Email": "diego.castro@example.com",
+    "Password": "Driver@123",
+    "Roles": ["Driver"]
+  },
+  {
+    "FirstName": "Ana",
+    "LastName": "Gomez",
+    "UserName": "anagomez",
+    "Email": "ana.gomez@example.com",
+    "Password": "Assistant@123",
+    "Roles": ["Assistant"]
+  },
+  {
+    "FirstName": "Sofia",
+    "LastName": "Lopez",
+    "UserName": "sofialopez",
+    "Email": "sofia.lopez@example.com",
+    "Password": "Assistant@123",
+    "Roles": ["Assistant"]
+  },
+  {
+    "FirstName": "Laura",
+    "LastName": "Sanchez",
+    "UserName": "laurasanchez",
+    "Email": "laura.sanchez@example.com",
+    "Password": "Assistant@123",
+    "Roles": ["Assistant"]
+  },
+  {
+    "FirstName": "Elena",
+    "LastName": "Diaz",
+    "UserName": "elenadiaz",
+    "Email": "elena.diaz@example.com",
+    "Password": "Assistant@123",
+    "Roles": ["Assistant"]
+  },
+  {
+    "FirstName": "Isabel",
+    "LastName": "Mendez",
+    "UserName": "isabelmendez",
+    "Email": "isabel.mendez@example.com",
+    "Password": "Assistant@123",
+    "Roles": ["Assistant"]
+  },
+  {
+    "FirstName": "Fernando",
+    "LastName": "Torres",
+    "UserName": "fernandotorres",
+    "Email": "fernando.torres@example.com",
+    "Password": "DriverAssistant@123",
+    "Roles": ["Driver", "Assistant"]
+  },
+  {
+    "FirstName": "Ricardo",
+    "LastName": "Vargas",
+    "UserName": "ricardovargas",
+    "Email": "ricardo.vargas@example.com",
+    "Password": "DriverAssistant@123",
+    "Roles": ["Driver", "Assistant"]
+  },
+  {
+    "FirstName": "Alejandro",
+    "LastName": "Cruz",
+    "UserName": "alejandrocruz",
+    "Email": "alejandro.cruz@example.com",
+    "Password": "DriverAssistant@123",
+    "Roles": ["Driver", "Assistant"]
+  },
+  {
+    "FirstName": "Andres",
+    "LastName": "Castro",
+    "UserName": "andrescastro",
+    "Email": "andres.castro@example.com",
+    "Password": "DriverAssistant@123",
+    "Roles": ["Driver", "Assistant"]
+  },
+  {
+    "FirstName": "Marco",
+    "LastName": "Ruiz",
+    "UserName": "marcoruiz",
+    "Email": "marco.ruiz@example.com",
+    "Password": "DriverAssistant@123",
+    "Roles": ["Driver", "Assistant"]
+  }
+]

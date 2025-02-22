@@ -1,0 +1,122 @@
+[
+  {
+    "LicensePlate": "ST-001",
+    "Brand": "Volvo",
+    "Model": "VNL",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-002",
+    "Brand": "Scania",
+    "Model": "R-Series",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-003",
+    "Brand": "Mercedes",
+    "Model": "Actros",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-004",
+    "Brand": "MAN",
+    "Model": "TGX",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-005",
+    "Brand": "DAF",
+    "Model": "XF",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-006",
+    "Brand": "Iveco",
+    "Model": "Stralis",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-007",
+    "Brand": "Renault",
+    "Model": "T",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-008",
+    "Brand": "Volvo",
+    "Model": "FM",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-009",
+    "Brand": "Scania",
+    "Model": "S-Series",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-010",
+    "Brand": "Mercedes",
+    "Model": "Arocs",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-011",
+    "Brand": "MAN",
+    "Model": "Lion's Coach",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-012",
+    "Brand": "DAF",
+    "Model": "CF",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-013",
+    "Brand": "Iveco",
+    "Model": "Eurocargo",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-014",
+    "Brand": "Renault",
+    "Model": "Range T",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-015",
+    "Brand": "Volvo",
+    "Model": "FMX",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-016",
+    "Brand": "Scania",
+    "Model": "G-Series",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-017",
+    "Brand": "Mercedes",
+    "Model": "Unimog",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-018",
+    "Brand": "MAN",
+    "Model": "TGS",
+    "Type": "DropSide"
+  },
+  {
+    "LicensePlate": "ST-019",
+    "Brand": "DAF",
+    "Model": "LF",
+    "Type": "Sider"
+  },
+  {
+    "LicensePlate": "ST-020",
+    "Brand": "Iveco",
+    "Model": "Stralis NP",
+    "Type": "DropSide"
+  }
+]

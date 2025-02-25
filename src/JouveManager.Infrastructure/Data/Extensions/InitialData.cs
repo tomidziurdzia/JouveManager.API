@@ -90,7 +90,7 @@ public class InitialData
                 }
             }
             
-            if (!context.Travels.Any())
+            if (!context.Shipments.Any())
             {
                 var shipmentData = File.ReadAllText("../JouveManager.Infrastructure/Data/Extensions/Json/shipment.json");
                     

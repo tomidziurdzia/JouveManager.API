@@ -32,7 +32,7 @@ public class GetTravelShipmentsQueryHandler(ITravelShipmentRepository travelShip
                 To = ts.Shipment.To,
                 Description = ts.Shipment.Description,
                 ScheduledDate = ts.Shipment.ScheduledDate,
-                Delivered = ts.Delivered,
+                ShipmentStatus = ts.ShipmentStatus,
                 DeliveryDate = ts.DeliveryDate,
                 FailureReason = ts.FailureReason ?? string.Empty
             }).ToList()

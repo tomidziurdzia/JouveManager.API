@@ -1,4 +1,5 @@
 using JouveManager.Domain;
+using JouveManager.Domain.Enum;
 using JouveManager.Domain.Repositories;
 using JouveManager.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -96,7 +97,7 @@ public class TravelShipmentRepository(ApplicationDbContext context) : ITravelShi
     public async Task<IEnumerable<TravelShipment>> GetActiveAssignmentsByShipmentId(Guid shipmentId, CancellationToken cancellationToken)
     {
         return await context.TravelShipments
-            .Where(ts => ts.ShipmentId == shipmentId && !ts.Delivered)
+            .Where(ts => ts.ShipmentId == shipmentId && ts.ShipmentStatus == ShipmentStatus.Delivered)
             .ToListAsync(cancellationToken);
     }
 

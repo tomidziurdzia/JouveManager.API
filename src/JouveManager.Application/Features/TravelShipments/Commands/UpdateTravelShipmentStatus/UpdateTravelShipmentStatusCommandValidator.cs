@@ -1,4 +1,5 @@
 using FluentValidation;
+using JouveManager.Domain.Enum;
 using MediatR;
 
 namespace JouveManager.Application.Features.TravelShipments.Commands.UpdateTravelShipmentStatus;
@@ -15,7 +16,7 @@ public class UpdateTravelShipmentStatusCommandValidator : AbstractValidator<Upda
             .NotEmpty()
             .WithMessage("TravelId is required.");
 
-        When(x => x.Delivered, () =>
+        When(x => x.ShipmentStatus == ShipmentStatus.Delivered, () =>
         {
             RuleFor(x => x.DeliveryDate)
                 .NotEmpty()
@@ -26,7 +27,7 @@ public class UpdateTravelShipmentStatusCommandValidator : AbstractValidator<Upda
                 .WithMessage("FailureReason must be empty when the shipment is delivered.");
         });
 
-        When(x => !x.Delivered, () =>
+        When(x => x.ShipmentStatus == ShipmentStatus.Cancelled, () =>
         {
             RuleFor(x => x.FailureReason)
                 .NotEmpty()

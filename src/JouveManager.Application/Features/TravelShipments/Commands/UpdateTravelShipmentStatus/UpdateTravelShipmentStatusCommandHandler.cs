@@ -3,6 +3,7 @@ using JouveManager.Domain.Repositories;
 using MediatR;
 using JouveManager.Application.Exceptions;
 using FluentValidation.Results;
+using JouveManager.Domain.Enum;
 
 namespace JouveManager.Application.Features.TravelShipments.Commands.UpdateTravelShipmentStatus;
 
@@ -15,25 +16,35 @@ public class UpdateTravelShipmentStatusCommandHandler(ITravelShipmentRepository 
             request.TravelId,
             cancellationToken) ?? throw new NotFoundException("TravelShipment", $"ShipmentId: {request.ShipmentId}, TravelId: {request.TravelId}");
 
-        if (request.Delivered && !request.DeliveryDate.HasValue)
+        // Validación para estado Delivered
+        if (request.ShipmentStatus == ShipmentStatus.Delivered)
         {
-            throw new ValidationException(new[]
+            if (!request.DeliveryDate.HasValue)
             {
-                new ValidationFailure("DeliveryDate", "Delivery date is required when marking as delivered")
-            });
+                throw new ValidationException(new[]
+                {
+                    new ValidationFailure("DeliveryDate", "Delivery date is required when marking as delivered")
+                });
+            }
         }
 
-        if (!request.Delivered && string.IsNullOrEmpty(request.FailureReason))
+        // Validación para estados Cancelled y Reprogrammed
+        if (request.ShipmentStatus == ShipmentStatus.Cancelled || request.ShipmentStatus == ShipmentStatus.Reprogrammed)
         {
-            throw new ValidationException(new[]
+            if (string.IsNullOrEmpty(request.FailureReason))
             {
-                new ValidationFailure("FailureReason", "Failure reason is required when marking as not delivered")
-            });
+                throw new ValidationException(new[]
+                {
+                    new ValidationFailure("FailureReason", "Failure reason is required when marking as cancelled or reprogrammed")
+                });
+            }
         }
 
-        travelShipment.Delivered = request.Delivered;
-        travelShipment.DeliveryDate = request.Delivered ? request.DeliveryDate : null;
-        travelShipment.FailureReason = request.Delivered ? null : request.FailureReason;
+        travelShipment.ShipmentStatus = request.ShipmentStatus;
+        travelShipment.DeliveryDate = request.ShipmentStatus == ShipmentStatus.Delivered ? request.DeliveryDate : null;
+        travelShipment.FailureReason = (request.ShipmentStatus == ShipmentStatus.Cancelled || request.ShipmentStatus == ShipmentStatus.Reprogrammed)
+            ? request.FailureReason
+            : null;
 
         await travelShipmentRepository.UpdateTravelShipmentAsync(travelShipment, cancellationToken);
         return Unit.Value;

@@ -1,3 +1,5 @@
+using JouveManager.Domain.Enum;
+
 namespace JouveManager.Application.DTOs.TravelShipment;
 
 public class ShipmentTravelsDto
@@ -8,7 +10,7 @@ public class ShipmentTravelsDto
     public required string To { get; set; }
     public required string Description { get; set; }
     public DateTime ScheduledDate { get; set; }
-    public bool Delivered { get; set; }
+    public ShipmentStatus ShipmentStatus { get; set; }
     public DateTime? DeliveryDate { get; set; }
     public required string FailureReason { get; set; }
 }

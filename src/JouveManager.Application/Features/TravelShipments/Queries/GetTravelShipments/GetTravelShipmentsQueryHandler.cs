@@ -1,6 +1,7 @@
 using JouveManager.Application.CQRS;
 using JouveManager.Application.DTOs.TravelShipment;
 using JouveManager.Application.Exceptions;
+using JouveManager.Domain;
 using JouveManager.Domain.Repositories;
 
 namespace JouveManager.Application.Features.TravelShipments.Queries.GetTravelShipments;

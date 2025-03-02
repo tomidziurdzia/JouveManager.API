@@ -22,12 +22,13 @@ public static class DependencyInjection
         services.AddTransient<IShipmentRepository, ShipmentRepository>();
         services.AddTransient<ITravelRepository, TravelRepository>();
         services.AddTransient<ITravelShipmentRepository, TravelShipmentRepository>();
+        services.AddTransient<ITravelShipmentHistoryRepository, TravelShipmentHistoryRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DevelopmentConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
             ));
-            
+
         services.AddIdentityCore<User>()
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()

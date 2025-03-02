@@ -8,7 +8,7 @@ namespace JouveManager.Infrastructure.Repositories;
 
 public class TravelShipmentRepository(ApplicationDbContext context) : ITravelShipmentRepository
 {
-    public async Task AssignShipmentToTravel(Guid shipmentId, Guid travelId, CancellationToken cancellationToken)
+    public async Task<TravelShipment> AssignShipmentToTravel(Guid shipmentId, Guid travelId, CancellationToken cancellationToken)
     {
         try
         {
@@ -19,11 +19,14 @@ public class TravelShipmentRepository(ApplicationDbContext context) : ITravelShi
             var travelShipment = new TravelShipment
             {
                 ShipmentId = shipmentId,
-                TravelId = travelId
+                TravelId = travelId,
+                ShipmentStatus = ShipmentStatus.InProgress
             };
 
-            context.TravelShipments.Add(travelShipment);
+            await context.TravelShipments.AddAsync(travelShipment, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
+
+            return travelShipment;
         }
         catch (Exception ex)
         {

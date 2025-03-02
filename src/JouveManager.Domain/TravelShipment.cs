@@ -1,6 +1,7 @@
-using JouveManager.Domain;
 using JouveManager.Domain.Abstractions;
 using JouveManager.Domain.Enum;
+
+namespace JouveManager.Domain;
 
 public class TravelShipment : Entity<Guid>
 {
@@ -11,4 +12,5 @@ public class TravelShipment : Entity<Guid>
     public ShipmentStatus ShipmentStatus { get; set; } = ShipmentStatus.NotStarted;
     public DateTime? DeliveryDate { get; set; }
     public string FailureReason { get; set; } = null;
+    public ICollection<TravelShipmentHistory> TravelShipmentHistory { get; set; } = new List<TravelShipmentHistory>();
 }

@@ -50,6 +50,8 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
     public required DbSet<Travel> Travels { get; set; }
     public required DbSet<Shipment> Shipments { get; set; }
     public required DbSet<TravelShipment> TravelShipments { get; set; }
+    public required DbSet<TravelShipmentHistory> TravelShipmentHistories { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -82,10 +84,6 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
             .HasForeignKey(t => t.SemiTrailerId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Relación muchos a muchos entre Travel y Shipment
-        builder.Entity<TravelShipment>()
-            .HasKey(ts => new { ts.TravelId, ts.ShipmentId });
-
         builder.Entity<TravelShipment>()
             .HasOne(ts => ts.Travel)
             .WithMany(t => t.TravelShipments)
@@ -96,6 +94,12 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
             .HasOne(ts => ts.Shipment)
             .WithMany(s => s.TravelShipments)
             .HasForeignKey(ts => ts.ShipmentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<TravelShipmentHistory>()
+            .HasOne(tsh => tsh.TravelShipment)
+            .WithMany(ts => ts.TravelShipmentHistory)
+            .HasForeignKey(tsh => tsh.TravelShipmentId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

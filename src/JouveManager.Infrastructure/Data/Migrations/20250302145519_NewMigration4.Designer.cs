@@ -3,6 +3,7 @@ using System;
 using JouveManager.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JouveManager.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250302145519_NewMigration4")]
+    partial class NewMigration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,43 +190,6 @@ namespace JouveManager.Infrastructure.Data.Migrations
                     b.HasIndex("TravelId");
 
                     b.ToTable("TravelShipments");
-                });
-
-            modelBuilder.Entity("JouveManager.Domain.TravelShipmentHistory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("text");
-
-                    b.Property<int>("NewStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("OldStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("TravelShipmentId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TravelShipmentId");
-
-                    b.ToTable("TravelShipmentHistories");
                 });
 
             modelBuilder.Entity("JouveManager.Domain.User", b =>
@@ -520,17 +486,6 @@ namespace JouveManager.Infrastructure.Data.Migrations
                     b.Navigation("Travel");
                 });
 
-            modelBuilder.Entity("JouveManager.Domain.TravelShipmentHistory", b =>
-                {
-                    b.HasOne("JouveManager.Domain.TravelShipment", "TravelShipment")
-                        .WithMany("TravelShipmentHistory")
-                        .HasForeignKey("TravelShipmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("TravelShipment");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -595,11 +550,6 @@ namespace JouveManager.Infrastructure.Data.Migrations
             modelBuilder.Entity("JouveManager.Domain.Travel", b =>
                 {
                     b.Navigation("TravelShipments");
-                });
-
-            modelBuilder.Entity("JouveManager.Domain.TravelShipment", b =>
-                {
-                    b.Navigation("TravelShipmentHistory");
                 });
 
             modelBuilder.Entity("JouveManager.Domain.Vehicle", b =>

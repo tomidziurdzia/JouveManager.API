@@ -18,9 +18,7 @@ public class TravelShipmentHistoryRepository(ApplicationDbContext context) : ITr
         catch (Exception ex)
         {
             throw new Exception($"Error deleting travel: {ex.Message}");
-
         }
-
     }
 
     public async Task<IEnumerable<TravelShipmentHistory>> GetTravelShipmentHistories(Guid travelShipmentId, CancellationToken cancellationToken)

@@ -87,7 +87,6 @@ public class TravelShipmentRepository(ApplicationDbContext context) : ITravelShi
     public async Task<TravelShipment> GetTravelShipment(Guid shipmentId, Guid travelId, CancellationToken cancellationToken)
     {
         var travelShipment = await context.TravelShipments
-            .Include(ts => ts.TravelShipmentHistory)
             .FirstOrDefaultAsync(ts => ts.ShipmentId == shipmentId && ts.TravelId == travelId, cancellationToken);
 
         if (travelShipment == null)

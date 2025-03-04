@@ -11,4 +11,5 @@ public class Shipment : Entity<Guid>
     public DateTime ScheduledDate { get; set; }
     public bool IsAssigned { get; set; } = false;
     public ICollection<TravelShipment> TravelShipments { get; set; } = new List<TravelShipment>();
+    public ICollection<TravelShipmentHistory> TravelShipmentHistories { get; set; } = new List<TravelShipmentHistory>();
 }

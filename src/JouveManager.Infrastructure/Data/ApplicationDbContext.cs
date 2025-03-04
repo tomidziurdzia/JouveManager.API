@@ -99,12 +99,10 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbConte
         builder.Entity<TravelShipmentHistory>(entity =>
         {
             entity.HasKey(e => e.Id);
-
-            entity.HasOne(h => h.TravelShipment)
-                .WithMany(ts => ts.TravelShipmentHistory)
-                .HasForeignKey(h => h.TravelShipmentId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+            entity.HasOne(h => h.Shipment)
+                .WithMany(s => s.TravelShipmentHistories)
+                .HasForeignKey(h => h.ShipmentId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

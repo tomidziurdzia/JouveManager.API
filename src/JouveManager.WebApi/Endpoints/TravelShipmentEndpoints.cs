@@ -1,11 +1,9 @@
-using System;
 using JouveManager.Application.DTOs.TravelShipment;
 using JouveManager.Application.Features.TravelShipments.Commands.AssignTravelShipment;
 using JouveManager.Application.Features.TravelShipments.Commands.UnassignShipmentFromTravel;
 using JouveManager.Application.Features.TravelShipments.Commands.UpdateTravelShipmentStatus;
 using JouveManager.Application.Features.TravelShipments.Queries.GetTravelShipments;
 using JouveManager.Application.Features.TravelShipments.Queries.GetTravelsShipments;
-using JouveManager.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

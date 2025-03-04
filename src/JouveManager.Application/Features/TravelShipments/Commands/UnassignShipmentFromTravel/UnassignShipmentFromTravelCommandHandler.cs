@@ -26,10 +26,9 @@ public class UnassignShipmentFromTravelCommandHandler(
             throw new NotFoundException("TravelShipment", $"ShipmentId: {request.ShipmentId}, TravelId: {request.TravelId}");
         }
 
-
-        var travelShipmentHistory = new TravelShipmentHistory
+        var travelShipmentHistory = new Domain.TravelShipmentHistory
         {
-            TravelShipmentId = travelShipment.Id,
+            ShipmentId = shipment.Id,
             OldStatus = travelShipment.ShipmentStatus,
             NewStatus = ShipmentStatus.NotStarted,
             Comments = "Shipment unassigned from travel",
@@ -40,11 +39,11 @@ public class UnassignShipmentFromTravelCommandHandler(
         };
 
         await travelShipmentHistoryRepository.Create(travelShipmentHistory, cancellationToken);
-        
-        await travelShipmentRepository.UnassignShipmentFromTravel(request.ShipmentId, request.TravelId, cancellationToken);
 
         shipment.IsAssigned = false;
         await shipmentRepository.Update(shipment, cancellationToken);
+
+        await travelShipmentRepository.UnassignShipmentFromTravel(request.ShipmentId, request.TravelId, cancellationToken);
 
         return Unit.Value;
     }

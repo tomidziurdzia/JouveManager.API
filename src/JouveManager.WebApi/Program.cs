@@ -57,7 +57,8 @@ app.RegisterUserEndpoints()
     .RegisterSemiTrailerEndpoints()
     .RegisterShipmentEndpoints()
     .RegisterTravelEndpoints()
-    .RegisterTravelShipmentEndpoints();
+    .RegisterTravelShipmentEndpoints()
+    .RegisterTravelShipmentHistoryEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

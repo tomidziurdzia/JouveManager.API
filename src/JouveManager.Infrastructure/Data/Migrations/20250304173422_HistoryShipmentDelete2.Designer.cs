@@ -3,6 +3,7 @@ using System;
 using JouveManager.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JouveManager.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250304173422_HistoryShipmentDelete2")]
+    partial class HistoryShipmentDelete2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,12 +219,12 @@ namespace JouveManager.Infrastructure.Data.Migrations
                     b.Property<int>("OldStatus")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ShipmentId")
+                    b.Property<Guid>("TravelShipmentId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShipmentId");
+                    b.HasIndex("TravelShipmentId");
 
                     b.ToTable("TravelShipmentHistories");
                 });
@@ -522,13 +525,12 @@ namespace JouveManager.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("JouveManager.Domain.TravelShipmentHistory", b =>
                 {
-                    b.HasOne("JouveManager.Domain.Shipment", "Shipment")
-                        .WithMany("TravelShipmentHistories")
-                        .HasForeignKey("ShipmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("JouveManager.Domain.TravelShipment", "TravelShipment")
+                        .WithMany("TravelShipmentHistory")
+                        .HasForeignKey("TravelShipmentId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
-                    b.Navigation("Shipment");
+                    b.Navigation("TravelShipment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -589,14 +591,17 @@ namespace JouveManager.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("JouveManager.Domain.Shipment", b =>
                 {
-                    b.Navigation("TravelShipmentHistories");
-
                     b.Navigation("TravelShipments");
                 });
 
             modelBuilder.Entity("JouveManager.Domain.Travel", b =>
                 {
                     b.Navigation("TravelShipments");
+                });
+
+            modelBuilder.Entity("JouveManager.Domain.TravelShipment", b =>
+                {
+                    b.Navigation("TravelShipmentHistory");
                 });
 
             modelBuilder.Entity("JouveManager.Domain.Vehicle", b =>

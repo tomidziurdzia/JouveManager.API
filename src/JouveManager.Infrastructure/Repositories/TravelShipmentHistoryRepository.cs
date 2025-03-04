@@ -18,13 +18,16 @@ public class TravelShipmentHistoryRepository(ApplicationDbContext context) : ITr
         catch (Exception ex)
         {
             throw new Exception($"Error deleting travel: {ex.Message}");
-
         }
+    }
 
+    public async Task<IEnumerable<TravelShipmentHistory>> GetTravelShipmentHistory(Guid shipmentId, CancellationToken cancellationToken)
+    {
+        return await context.TravelShipmentHistories.Where(x => x.ShipmentId == shipmentId).OrderByDescending(x => x.LastModified).ToListAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<TravelShipmentHistory>> GetTravelShipmentHistories(Guid travelShipmentId, CancellationToken cancellationToken)
     {
-        return await context.TravelShipmentHistories.Where(x => x.TravelShipmentId == travelShipmentId).OrderByDescending(x => x.LastModified).ToListAsync(cancellationToken);
+        return await context.TravelShipmentHistories.Where(x => x.ShipmentId == travelShipmentId).OrderByDescending(x => x.LastModified).ToListAsync(cancellationToken);
     }
 }

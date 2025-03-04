@@ -8,7 +8,11 @@ using MediatR;
 
 namespace JouveManager.Application.Features.TravelShipments.Commands.AssignTravelShipment;
 
-public class AssignShipmentToTravelCommandHandler(ITravelShipmentRepository travelShipmentRepository, IShipmentRepository shipmentRepository, ITravelShipmentHistoryRepository travelShipmentHistoryRepository, IAuthService authService) : ICommandHandler<AssignShipmentToTravelCommand, Unit>
+public class AssignShipmentToTravelCommandHandler(
+    ITravelShipmentRepository travelShipmentRepository,
+    IShipmentRepository shipmentRepository,
+    ITravelShipmentHistoryRepository travelShipmentHistoryRepository,
+    IAuthService authService) : ICommandHandler<AssignShipmentToTravelCommand, Unit>
 {
     public async Task<Unit> Handle(AssignShipmentToTravelCommand request, CancellationToken cancellationToken)
     {
@@ -26,13 +30,11 @@ public class AssignShipmentToTravelCommandHandler(ITravelShipmentRepository trav
 
         await shipmentRepository.Update(shipment, cancellationToken);
 
-        Console.WriteLine(shipment);
-
         var travelShipment = await travelShipmentRepository.AssignShipmentToTravel(request.ShipmentId, request.TravelId, cancellationToken);
 
-        var travelShipmentHistory = new TravelShipmentHistory
+        var travelShipmentHistory = new Domain.TravelShipmentHistory
         {
-            TravelShipmentId = travelShipment.Id,
+            ShipmentId = shipment.Id,
             OldStatus = ShipmentStatus.NotStarted,
             NewStatus = ShipmentStatus.InProgress,
             Comments = $"Shipment assigned to travel",

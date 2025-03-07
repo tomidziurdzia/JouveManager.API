@@ -17,12 +17,7 @@ public static class DependencyInjection
     {
 
         app.UseExceptionHandler(options => { });
-        app.UseHealthChecks("/health",
-            new HealthCheckOptions
-            {
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
-
+       
         return app;
     }
 }

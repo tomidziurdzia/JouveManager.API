@@ -12,14 +12,14 @@ public class GetShipmentsQueryHandler(IShipmentRepository shipmentRepository) : 
         return shipments
             .OrderBy(shipment => shipment.ScheduledDate)
             .Select(s => new ShipmentDto
-        {
-            Id = s.Id,
-            CustomerName = s.CustomerName,
-            From = s.From,
-            To = s.To,
-            Description = s.Description,
-            IsAssigned = s.IsAssigned,
-            ScheduledDate = s.ScheduledDate,
-        });
+            {
+                Id = s.Id,
+                CustomerName = s.CustomerName,
+                From = s.From,
+                To = s.To,
+                Description = s.Description,
+                IsAssigned = s.IsAssigned,
+                ScheduledDate = s.ScheduledDate,
+            });
     }
 }

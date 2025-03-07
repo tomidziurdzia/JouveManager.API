@@ -3,14 +3,20 @@ using JouveManager.Domain.Repositories;
 using MediatR;
 using JouveManager.Application.Exceptions;
 using FluentValidation.Results;
+using JouveManager.Application.Contracts.Identity;
 using JouveManager.Domain.Enum;
 
 namespace JouveManager.Application.Features.TravelShipments.Commands.UpdateTravelShipmentStatus;
 
-public class UpdateTravelShipmentStatusCommandHandler(ITravelShipmentRepository travelShipmentRepository) : ICommandHandler<UpdateTravelShipmentStatusCommand, Unit>
+public class UpdateTravelShipmentStatusCommandHandler(
+    ITravelShipmentRepository travelShipmentRepository,
+    ITravelShipmentHistoryRepository travelShipmentHistoryRepository,
+    IAuthService authService): ICommandHandler<UpdateTravelShipmentStatusCommand, Unit>
 {
     public async Task<Unit> Handle(UpdateTravelShipmentStatusCommand request, CancellationToken cancellationToken)
     {
+        var username = authService.GetSessionUser();
+
         var travelShipment = await travelShipmentRepository.GetTravelShipment(
             request.ShipmentId,
             request.TravelId,
@@ -39,12 +45,26 @@ public class UpdateTravelShipmentStatusCommandHandler(ITravelShipmentRepository 
                 });
             }
         }
+        
+        var travelShipmentHistory = new Domain.TravelShipmentHistory
+        {
+            ShipmentId = travelShipment.ShipmentId,
+            OldStatus = travelShipment.ShipmentStatus,
+            NewStatus = request.ShipmentStatus,
+            Comments = request.ShipmentStatus.ToString(),
+            CreatedAt = travelShipment.CreatedAt,
+            CreatedBy = travelShipment.CreatedBy,
+            LastModified = DateTime.UtcNow,
+            LastModifiedBy = username
+        };
 
         travelShipment.ShipmentStatus = request.ShipmentStatus;
         travelShipment.DeliveryDate = request.ShipmentStatus == ShipmentStatus.Delivered ? request.DeliveryDate : null;
         travelShipment.FailureReason = (request.ShipmentStatus == ShipmentStatus.Cancelled || request.ShipmentStatus == ShipmentStatus.Reprogrammed)
             ? request.FailureReason
             : null;
+
+        await travelShipmentHistoryRepository.Create(travelShipmentHistory, cancellationToken);
 
         await travelShipmentRepository.UpdateTravelShipmentAsync(travelShipment, cancellationToken);
         return Unit.Value;

@@ -30,7 +30,7 @@ public class AssignShipmentToTravelCommandHandler(
 
         await shipmentRepository.Update(shipment, cancellationToken);
 
-        var travelShipment = await travelShipmentRepository.AssignShipmentToTravel(request.ShipmentId, request.TravelId, cancellationToken);
+        await travelShipmentRepository.AssignShipmentToTravel(request.ShipmentId, request.TravelId, cancellationToken);
 
         var travelShipmentHistory = new Domain.TravelShipmentHistory
         {

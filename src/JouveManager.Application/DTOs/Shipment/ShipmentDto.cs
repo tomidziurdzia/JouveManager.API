@@ -1,3 +1,5 @@
+using JouveManager.Domain.Enum;
+
 namespace JouveManager.Application.DTOs.Shipment;
 
 public class ShipmentDto

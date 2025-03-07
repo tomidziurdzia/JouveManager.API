@@ -5,12 +5,16 @@ using JouveManager.Application.Contracts.Identity;
 using JouveManager.Application.Models.Token;
 using JouveManager.Domain;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace JouveManager.Infrastructure.Services.Auth;
 
-public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtSettings> jwtSettings) : IAuthService
+public class AuthService(
+    IHttpContextAccessor httpContextAccessor,
+    IOptions<JwtSettings> jwtSettings,
+    UserManager<User> userManager) : IAuthService
 {
     private JwtSettings _jwtSettings { get; } = jwtSettings.Value;
 
@@ -21,7 +25,7 @@ public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtS
             new Claim("userId", user.Id),
             new Claim("email", user.Email!),
         };
-        
+
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
@@ -45,5 +49,11 @@ public class AuthService(IHttpContextAccessor httpContextAccessor, IOptions<JwtS
             .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
         return username!;
+    }
+
+    public async Task<string> GetUserFullName(string username)
+    {
+        var user = await userManager.FindByEmailAsync(username);
+        return user != null ? $"{user.FirstName} {user.LastName}".Trim() : username;
     }
 }

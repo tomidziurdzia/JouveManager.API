@@ -16,6 +16,7 @@ public class CreateTravelCommandHandler(
 {
     public async Task<TravelDto> Handle(CreateTravelCommand request, CancellationToken cancellationToken)
     {
+        Console.WriteLine(request);
         var driver = await userManager.FindByIdAsync(request.DriverId)
             ?? throw new NotFoundException("Driver", request.DriverId);
 
@@ -65,7 +66,7 @@ public class CreateTravelCommandHandler(
             DriverId = request.DriverId.ToString(),
             AssistantId = request.AssistantId?.ToString(),
             VehicleId = request.VehicleId,
-            SemiTrailerId = request.SemiTrailerId != null ? request.SemiTrailerId.Value : null
+            SemiTrailerId = request.SemiTrailerId
         };
         await travelRepository.Create(travel, cancellationToken);
 

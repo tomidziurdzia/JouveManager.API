@@ -25,7 +25,7 @@ public static class DependencyInjection
         services.AddTransient<ITravelShipmentHistoryRepository, TravelShipmentHistoryRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+            options.UseNpgsql(configuration.GetConnectionString("DevelopmentConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
             ));
 

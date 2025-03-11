@@ -82,7 +82,7 @@ public class CreateTravelCommandHandler(
             AssistantName = assistantFullname,
             VehicleId = travel.VehicleId,
             VehicleLicensePlate = vehicle?.LicensePlate ?? string.Empty,
-            SemiTrailerId = travel.SemiTrailerId != null ? travel.SemiTrailerId.Value : null,
+            SemiTrailerId = travel.SemiTrailerId,
             SemiTrailerLicensePlate = semiTrailer?.LicensePlate ?? string.Empty
         };
     }

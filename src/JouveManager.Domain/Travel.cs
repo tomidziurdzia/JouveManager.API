@@ -7,7 +7,7 @@ public class Travel : Entity<Guid>
     public DateTime Date { get; set; }
     public required string DriverId { get; set; }
     public User Driver { get; set; }
-    public string AssistantId { get; set; }
+    public string? AssistantId { get; set; }
     public User Assistant { get; set; }
     public required Guid VehicleId { get; set; }
     public Vehicle Vehicle { get; set; }

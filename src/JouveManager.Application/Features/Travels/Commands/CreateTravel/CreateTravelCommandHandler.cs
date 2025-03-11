@@ -16,7 +16,6 @@ public class CreateTravelCommandHandler(
 {
     public async Task<TravelDto> Handle(CreateTravelCommand request, CancellationToken cancellationToken)
     {
-        Console.WriteLine(request);
         var driver = await userManager.FindByIdAsync(request.DriverId)
             ?? throw new NotFoundException("Driver", request.DriverId);
 

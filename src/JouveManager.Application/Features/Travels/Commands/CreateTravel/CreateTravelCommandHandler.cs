@@ -65,7 +65,7 @@ public class CreateTravelCommandHandler(
             DriverId = request.DriverId.ToString(),
             AssistantId = request.AssistantId?.ToString(),
             VehicleId = request.VehicleId,
-            SemiTrailerId = request.SemiTrailerId != null ? request.SemiTrailerId.Value : null
+            SemiTrailerId = request.SemiTrailerId
         };
         await travelRepository.Create(travel, cancellationToken);
 

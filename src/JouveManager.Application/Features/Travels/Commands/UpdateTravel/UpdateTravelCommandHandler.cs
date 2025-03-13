@@ -1,10 +1,11 @@
 using JouveManager.Application.CQRS;
 using JouveManager.Application.Exceptions;
-using JouveManager.Application.Features.Travels.Commands.UpdateTravel;
 using JouveManager.Domain;
 using JouveManager.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+
+namespace JouveManager.Application.Features.Travels.Commands.UpdateTravel;
 
 public class UpdateTravelCommandHandler(
     UserManager<User> userManager,
@@ -29,7 +30,7 @@ public class UpdateTravelCommandHandler(
         if (!string.IsNullOrEmpty(request.DriverId))
         {
             var driver = await userManager.FindByIdAsync(request.DriverId)
-                ?? throw new NotFoundException("Driver", request.DriverId);
+                         ?? throw new NotFoundException("Driver", request.DriverId);
 
             var isDriverRole = await userManager.IsInRoleAsync(driver, "Driver");
             if (!isDriverRole)
@@ -43,10 +44,14 @@ public class UpdateTravelCommandHandler(
             travel.DriverId = request.DriverId;
         }
 
-        if (!string.IsNullOrEmpty(request.AssistantId))
+        if (request.AssistantId == null)
+        {
+            travel.AssistantId = null;
+        }
+        else if (!string.IsNullOrEmpty(request.AssistantId))
         {
             var assistant = await userManager.FindByIdAsync(request.AssistantId)
-                ?? throw new NotFoundException("Assistant", request.AssistantId);
+                            ?? throw new NotFoundException("Assistant", request.AssistantId);
 
             var isAssistantRole = await userManager.IsInRoleAsync(assistant, "Assistant");
             if (!isAssistantRole)
@@ -71,7 +76,7 @@ public class UpdateTravelCommandHandler(
         if (request.VehicleId.HasValue)
         {
             var vehicle = await vehicleRepository.Get(request.VehicleId.Value, cancellationToken)
-                ?? throw new NotFoundException("Vehicle", request.VehicleId);
+                          ?? throw new NotFoundException("Vehicle", request.VehicleId);
 
             travel.VehicleId = request.VehicleId.Value;
         }
@@ -79,9 +84,13 @@ public class UpdateTravelCommandHandler(
         if (request.SemiTrailerId.HasValue)
         {
             var semiTrailer = await semiTrailerRepository.Get(request.SemiTrailerId.Value, cancellationToken)
-                ?? throw new NotFoundException("SemiTrailer", request.SemiTrailerId);
+                              ?? throw new NotFoundException("SemiTrailer", request.SemiTrailerId);
 
             travel.SemiTrailerId = request.SemiTrailerId;
+        }
+        else if (request.SemiTrailerId == null)
+        {
+            travel.SemiTrailerId = null;
         }
 
         await travelRepository.Update(travel, cancellationToken);
